@@ -8,17 +8,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class Contact extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * Elements de contact
+     * @var array
      */
-    public function __construct()
+
+    public $contact;
+
+    public function __construct(Array $contact)
     {
-        //
+        $this->contact=$contact;
     }
 
     /**
@@ -27,18 +32,17 @@ class Contact extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Adress('andrymihamina7@gmail.com', 'Andry Mihamina'),
+            from: new Address('andrymihamina7@gmail.com', 'Andry Mihamina'),
             subject: 'Contact',
         );
     }
-
     /**
      * Get the message content definition.
      */
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.contact',
         );
     }
 
