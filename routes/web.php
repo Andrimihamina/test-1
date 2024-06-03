@@ -11,8 +11,8 @@ use App\Http\Controllers\PhotoController;
 Route::get('users', [UsersController::class, 'create']);
 Route::post('users', [UsersController::class, 'store']);
 
-Route::get('contact', [ContactController::class, 'create']);
-Route::post('contact', [ContactController::class, 'store']);
+Route::get('contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('photo', [PhotoController::class, 'create']);
 Route::post('photo', [PhotoController::class, 'store']);

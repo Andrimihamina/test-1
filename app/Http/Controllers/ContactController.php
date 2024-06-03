@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use App\Mail\Contact;
  
 class ContactController extends Controller
@@ -15,11 +16,15 @@ class ContactController extends Controller
         return view('contact');
     }
  
-    public function store(ContactRequest $request): view
+    
+    public function store(Request $request)
     {
-        Mail::to('andrymihamina7@gmail.com')
-            ->queue(new Contact($request->except('_token')));
 
-        return view('confirm');
+        \App\Models\Contact::create([
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
+
+        return "C'est bien enregistré !";
     }
 }
